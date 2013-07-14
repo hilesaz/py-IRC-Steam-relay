@@ -7,7 +7,6 @@ from command_handler import CommandHandler
 logger = log.Logger(__name__)
 
 
-SM__IRC_PORT = 6697
 SM__IRC_BUFFER_SIZE = 512
 SM__CONNECT_TIMEOUT = 3
 
@@ -29,7 +28,7 @@ class IRCUser:
 	
 class IRCModule:
 	
-	def __init__(self, servers, channels, name, password = ""):#pass False value to not autoconnect
+	def __init__(self, servers, channels, name, password = ""):
 		self.s = {}#IRC socket
 		self.commandHandler = CommandHandler(self)
 		self.user = name[0]#user
@@ -57,7 +56,7 @@ class IRCModule:
 		
 	def _connect(self, host):
 		try:
-			self.s = socket.create_connection((host, SM__IRC_PORT), SM__CONNECT_TIMEOUT)
+			self.s = socket.create_connection(host, SM__CONNECT_TIMEOUT)
 		except socket.gaierror as err:
 			logger.warning("Failed to resolve hostname:",host)
 			return False

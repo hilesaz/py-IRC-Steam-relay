@@ -3,7 +3,7 @@ import log
 
 logger = log.Logger(__name__)
 
-servers = ["localhost"]
+servers = [("irc.mlas1.us",6667)]
 channels = ["#bovine"]
 names = ["bovMaster","bov1","bov2","bov3","bov4","bov5","bov6"]
 
