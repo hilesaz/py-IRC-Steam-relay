@@ -5,7 +5,7 @@ import socket
 import struct
 
 from command_handler import CommandHandler
-from steam_servers import servers
+from steam.steam_servers import servers
 
 def encryptData(key, data):
 	iv = Random.new().read(AES.block_size)
@@ -99,4 +99,16 @@ class SteamClient:
 		
 	def connect(self, server):
 		self.connection = SteamConnection(server)
-		
+
+    def send(self, msg, body, job):
+        if job.jobType == Job.function:
+            sourceJobID = self.currentJobID + 1
+            self.currentJobID += 1
+            this.outstandingJobs[sourceJobID] = job
+        else:
+            targetJobID = job
+        hdr = b''
+        if msg == SConsts.msg.ChannelEncryptResponse:
+            hdr = struct.pack("<iQQ", msg or SConsts.msg.Invalid, targetJobID or Job.InvalidJobID, sourceJobID or Job.InvalidJobID)
+        else if msg & SteamClient.ProtoMask:
+            hdr = struct.pack("",
